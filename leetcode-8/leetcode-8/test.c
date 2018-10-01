@@ -10,22 +10,56 @@ int myAtoi(char* str)
 	int i = 0;
 	int j = 0;
 	long long tmp = 0;
-	if (str[0] == '-' || str[0] == '+')
+	int flag = 1;
+	int bit = 0;
+	int bit2 = 0;
+	while (*str == ' ')
+	{
+		str++;
+	}
+	if (str[0] == '-')
 	{
 		i++;
+		flag = -1;   //标记为负数
 	}
-	for (j=i; j < size; j++)
+	if (str[0] == '+')
+	{
+		i++;
+		flag = 1;  //标记为正数
+	}
+
+	for (j = i; j < size; j++)
 	{
 		if (str[j] >= '0' && str[j] <= '9')
 		{
-			tmp = tmp * 10 + (str[j]-'0');
+			tmp = tmp * 10 + (str[j] - '0');
+
+			if (str[j] != '0' && bit2 == 0)
+			{
+				bit2 = 1;
+			}
+			if (bit2 == 1)
+			{
+				bit++;
+			}
 		}
 		else
 		{
 			break;
 		}
 	}
-	if (str[0] == '-')
+	if (bit > 12)
+	{
+		if (flag == -1)
+		{
+			return INT_MIN;
+		}
+		if (flag == 1)
+		{
+			return INT_MAX;
+		}
+	}
+	if (flag == -1)
 	{
 		tmp = tmp * -1;
 	}
@@ -37,7 +71,7 @@ int myAtoi(char* str)
 	{
 		return INT_MIN;
 	}
-	return (int)tmp;	
+	return (int)tmp;
 }
 
 int main()
