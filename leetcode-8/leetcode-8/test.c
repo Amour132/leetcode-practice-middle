@@ -48,7 +48,7 @@ int myAtoi(char* str)
 			break;
 		}
 	}
-	if (bit > 12)
+	if (bit > 10)
 	{
 		if (flag == -1)
 		{
@@ -76,7 +76,7 @@ int myAtoi(char* str)
 
 int main()
 {
-	char str[] = "-42";
+	char str[] = "-000000001";
 	int ret = myAtoi(str);
 	printf("%d\n", ret);
 	return 0;
